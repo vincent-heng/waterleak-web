@@ -94,5 +94,5 @@ io.sockets.on('connection', function (socket) {
 });
 
 console.log("Starting the server...".info);
-server.listen(8080);
+server.listen(80);
 getInfosFromDatabase();
