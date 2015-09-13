@@ -15,13 +15,14 @@
 
 		<!-- Bootstrap Core CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		
+
 		<!-- jQuery CSS -->
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 		
 		<!-- Custom CSS -->
 		<link href="css/modern-business.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,7 +47,7 @@
 					<div class="panel-heading">Your informations</div>
 					<div class="panel-body">
 						Currently using water : {{infos.flowCount > 0 ? "Yes" : "No"}}<br/>
-						Average water consumption : {{infos.flowRate | number: 3}} per min<br/>
+						Average water consumption : {{infos.flowRate | number: 3}}L per min<br/>
 						Leak detected :
 						<span ng-show="receiveNotifications">{{(infos.state>0 && infos.flowCount > 0) ? "Yes" : "No"}}</span>
 						<span ng-show="!receiveNotifications">Disabled</span>
@@ -58,7 +59,9 @@
 				<div class="panel panel-default" id="middleBody">
 					<div class="panel-heading">Realtime water consumption</div>
 					<div class="panel-body">
+						<div id="waterFlowChart">
 
+						</div>
 					</div>
 				</div>
 			</div>
@@ -83,6 +86,11 @@
 		
 		<!-- Bootstrap Core JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+		<!-- Chart with morris-->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
 	</body>
 
 </html>

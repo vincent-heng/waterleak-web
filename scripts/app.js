@@ -42,12 +42,49 @@ app.controller("IndexCtrl", function($scope, socket){
 		$scope.infos.state = parseInt($scope.infos.state);
 		$scope.infos.waterState = parseInt($scope.infos.waterState);
 
+		var currentWaterFlow = {
+			time : (new Date()).toISOString(),
+			flowCount : $scope.infos.flowCount
+		};
+
+		if (waterFlowArray == undefined) {
+			initWaterFlowChart(currentWaterFlow);
+		} else {
+			waterFlowArray.push(currentWaterFlow);
+			updateChart(waterFlowArray);
+		}
 	});
 	
 	// Internal functions
 	// ==================
-	var sendToggleValve = function() {
-		socket.emit('toggle_valve_event');
+	var waterFlowArray;
+	var waterFlowChart;
+
+	var initWaterFlowChart = function(firstWaterFlow) {
+		waterFlowArray = new Array();
+		waterFlowArray.push(firstWaterFlow);
+
+		waterFlowChart = new Morris.Line({
+			// ID of the element in which to draw the chart.
+			element: 'waterFlowChart',
+			// Chart data records -- each entry in this array corresponds to a point on
+			// the chart.
+			data: waterFlowArray,
+			// The name of the data record attribute that contains x-values.
+			xkey: 'time',
+			xLabels: 'minute',
+			// A list of names of data record attributes that contain y-values.
+			ykeys: ['flowCount'],
+			// Labels for the ykeys -- will be displayed when you hover over the
+			// chart.
+			labels: ['flow']
+		});
+	};
+
+
+
+	var updateChart = function(data) {
+		waterFlowChart.setData(data);
 	}
 
 	// Methods published to the scope

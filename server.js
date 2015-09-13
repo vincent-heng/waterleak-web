@@ -80,7 +80,7 @@ var sendInfos = function(infos) {
 /*On User Connection*/
 io.sockets.on('connection', function (socket) {
     console.log("New user connected !".data);
-    socket.emit(infos);
+    socket.emit('refresh_info_event', infos);
 
     socket.on('toggle_valve_event', function() {
         request("http://iotroadshow.azure-mobile.net/api/togglewaterstate", function(error, response, body) {
