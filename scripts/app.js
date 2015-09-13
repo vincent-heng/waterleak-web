@@ -57,6 +57,10 @@ app.controller("IndexCtrl", function($scope, socket){
 	
 	// Internal functions
 	// ==================
+	var sendToggleValve = function() {
+		socket.emit('toggle_valve_event');
+	}
+
 	var waterFlowArray;
 	var waterFlowChart;
 
